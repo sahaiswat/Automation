@@ -6,9 +6,9 @@
       <class name="com.qa.testcase.KiwiSaverCalctest">
         <methods>
           <include name="Setup"/>
-          <include name="VerifyUS2TC2"/>
-          <include name="VerifyUS1TC1"/>
-          <include name="VerifyUS2TC3"/>
+          <include name="VerifyUS2TC2" invocation-numbers="0"/>
+          <include name="VerifyUS1TC1" invocation-numbers="0"/>
+          <include name="VerifyUS2TC3" invocation-numbers="0"/>
           <include name="CloseApplication"/>
           <include name="TC1_ShowInfoMessageForAge"/>
         </methods>

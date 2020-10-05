@@ -1,9 +1,13 @@
 package com.qa.testcase;
 
+
 import org.openqa.selenium.WebDriver;
+
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
+
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.qa.base.TestBase;
@@ -14,7 +18,7 @@ public class KiwiSaverCalctest extends TestBase{
 	
 	public WebDriver driver;
 	public KiwiSaverCalc kiwisaverpage;
-	
+		
 	
 	public KiwiSaverCalctest()
 	{
@@ -25,9 +29,7 @@ public class KiwiSaverCalctest extends TestBase{
 	public void Setup()
 	{
 		initialization();
-		kiwisaverpage=new KiwiSaverCalc();
-		
-		
+						
 	}
 	
 	@Test
@@ -37,51 +39,69 @@ public class KiwiSaverCalctest extends TestBase{
 		kiwisaverpage.ClickonCalc();
 		 String actualCurrentAgeMessage = kiwisaverpage.VerifyInfomessage();
 
-	        String expectedTitlePage = "This calculator has an age limit of 18 to 64 years old";
+	        String expectedTitlePage = "This calculator has an age limit of 18 to 64 years old.";
 	        Assert.assertEquals(actualCurrentAgeMessage, expectedTitlePage);		
 		    
 	}
 	
-	@Test
+	 @DataProvider(name = "data1")
+	    public Object[][] createData1() {
+	     return new Object[][] {
+	       { "30", "82000" }
+	     };
+	    }
 	
+	
+	@Test(dataProvider="data1")
+		
 	public  void VerifyUS1TC1(String ageval, String salary) {
 		
-		initialization();
-		kiwisaverpage=new KiwiSaverCalc();
 		kiwisaverpage.ClickonCalc();
-        boolean  balance= kiwisaverpage.US2TC1("30", "82000");
+        boolean  balance= kiwisaverpage.US2TC1(ageval, salary);
         
        Assert.assertTrue(balance, "KiwiSaver balance is estimated to be:$436,365" );
 	}
 	
-     @Test
+	@DataProvider(name = "data2")
+    public Object[][] createData2() {
+     return new Object[][] {
+       { "45","100000","90", "290000" }
+     };
+    }
 	
-	public  void VerifyUS2TC2(String ageval, String salary, String kiwi_saver_balanceVal, String voluntary_contributionVal,
+     @Test(dataProvider="data2") 
+     
+	public  void VerifyUS2TC2(String ageval, String kiwi_saver_balanceVal, String voluntary_contributionVal,
             String goal_requirementVal) {
 		
-		initialization();
-		kiwisaverpage=new KiwiSaverCalc();
+		
 		kiwisaverpage.ClickonCalc();
-        boolean  balance= kiwisaverpage.US2TC2("45","100000","90", "290000");
+        boolean  balance= kiwisaverpage.US2TC2(ageval, kiwi_saver_balanceVal, voluntary_contributionVal, goal_requirementVal);
         
-       Assert.assertTrue(balance, "KiwiSaver balance is estimated to be:$436,365" );
+       Assert.assertTrue(balance, "KiwiSaver balance is estimated to be:$259,581" );
 	}
-
-     @Test
      
-     public  void VerifyUS2TC3(String ageval, String salary, String kiwi_saver_balanceVal, String voluntary_contributionVal,
+     @DataProvider(name = "data3")
+     public Object[][] createData3() {
+      return new Object[][] {
+        { "55","1400000","10", "200000" }
+      };
+     }
+
+     @Test(dataProvider="data3") 
+     
+     public  void VerifyUS2TC3(String ageval, String kiwi_saver_balanceVal, String voluntary_contributionVal,
              String goal_requirementVal) {
  		
- 		initialization();
- 		kiwisaverpage=new KiwiSaverCalc();
+ 		
  		kiwisaverpage.ClickonCalc();
-         boolean  balance= kiwisaverpage.US2TC2("55","1400000","10", "200000");
+         boolean  balance= kiwisaverpage.US2TC3(ageval, kiwi_saver_balanceVal, voluntary_contributionVal, goal_requirementVal);
          
-        Assert.assertTrue(balance, "KiwiSaver balance is estimated to be:$436,365" );
+        Assert.assertTrue(balance, "KiwiSaver balance is estimated to be:$1,975,033" );
  	}
      
-	
-	@AfterClass
+
+	@AfterMethod
 	public void CloseApplication()
 	{
 		TearDown();

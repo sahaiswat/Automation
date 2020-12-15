@@ -21,7 +21,7 @@ import java.io.FileInputStream;
 			try {
 				prop = new Properties();
 				FileInputStream ip = new FileInputStream(
-						"C:\\Users\\kc\\eclipse-workspace\\WestpacRetirementCalc\\src\\main\\java\\com\\qa\\config\\config.properties");
+						"C:\\Users\\ssinha\\eclipse-workspace\\WestpacRetirementCalc\\src\\main\\java\\com\\qa\\config\\config.properties");
 				prop.load(ip);
 				initialization();
 			} catch (Exception e) {
@@ -38,7 +38,7 @@ import java.io.FileInputStream;
 			
 			if (browserName.equals("chrome"))
 	{
-		System.setProperty("webdriver.chrome.driver", "C:\\\\Users\\\\kc\\\\Desktop\\\\driver\\\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\\\Users\\\\ssinha\\\\Desktop\\\\driver\\\\chromedriver.exe");
 	}
 			
 			driver=new ChromeDriver();
